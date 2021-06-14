@@ -30,6 +30,7 @@ const TRANSITION_DURATION = Math.max(
   TRANSITION_DURATION_MOBILE,
   TRANSITION_DURATION_DESKTOP,
 );
+
 type PreventCloseProps =
   | {
       /**
