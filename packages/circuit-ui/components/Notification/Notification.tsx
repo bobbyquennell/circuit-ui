@@ -15,11 +15,7 @@
 
 import { FC, SVGProps, ReactNode } from 'react';
 import { css } from '@emotion/core';
-import {
-  CircleCheckmarkFilled,
-  CircleCrossFilled,
-  CircleWarningFilled,
-} from '@sumup/icons';
+import { Confirm, Alert, Notify } from '@sumup/icons';
 import { Theme } from '@sumup/design-tokens';
 
 import { ClickEvent } from '../../types/events';
@@ -59,9 +55,9 @@ const colorMap = {
 } as const;
 
 const iconMap = {
-  success: CircleCheckmarkFilled,
-  error: CircleCrossFilled,
-  warning: CircleWarningFilled,
+  success: Confirm,
+  error: Alert,
+  warning: Notify,
 } as const;
 
 const iconStyles = (variant: Variant) => (theme: Theme) =>
@@ -102,7 +98,7 @@ export const Notification = ({
 
   return (
     <Container {...props}>
-      {Icon && <Icon css={iconStyles(variant)} size="large" />}
+      {Icon && <Icon css={iconStyles(variant)} size="24" />}
 
       <Content>{children}</Content>
 
