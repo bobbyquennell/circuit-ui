@@ -23,12 +23,12 @@ import { transformSync } from '@babel/core';
 import manifest from '../manifest.json';
 
 const BASE_DIR = path.join(__dirname, '..');
-const ICON_DIR = path.join(BASE_DIR, './web/v1');
+const ICON_DIR = path.join(BASE_DIR, './web/v2');
 const DIST_DIR = path.join(BASE_DIR, 'dist');
 
 enum IconSize {
-  SMALL = 'small',
-  LARGE = 'large',
+  SIZE_16 = '16',
+  SIZE_24 = '24',
 }
 
 type Icon = {
@@ -85,7 +85,7 @@ function buildComponentFile(component: Component): string {
       ${sizeMap.join('\n')}
     }
 
-    export const ${component.name} = ({ size = 'small', ...props }) => {
+    export const ${component.name} = ({ size = '24', ...props }) => {
       const Icon = sizeMap[size];
       return <Icon {...props} />;
     };
@@ -108,8 +108,11 @@ function buildDeclarationFile(components: Component[]): string {
   return dedent`
     import { FC, SVGProps } from 'react';
 
-    interface IconProps extends React.SVGProps<SVGSVGElement> {
-      size?: 'small' | 'large';
+    export interface IconProps extends React.SVGProps<SVGSVGElement> {
+      /**
+       * Choose between the 16 or 24 pixel size. Defaults to \`24\`.
+       */
+      size?: '16' | '24';
     }
 
     ${declarationStatements.join('\n')}
